@@ -25,7 +25,6 @@ export async function generateStaticParams() {
     cabinId: String(cabin.id),
   }));
 
-  console.log(ids);
   return ids;
 }
 
