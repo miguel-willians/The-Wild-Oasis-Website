@@ -13,10 +13,8 @@ export default async function Reservation({ cabin }: ReservationProps) {
     getBookedDatesByCabinId(Number(cabin.id)),
   ]);
 
-  console.log(settings, bookedDates);
-
   return (
-    <div className="grid grid-cols-2 border border-primary-800 min-h-[400px]">
+    <div className="grid grid-cols-[max-content_1fr] items-start gap-8 border border-primary-800 p-4">
       <DateSelector
         settings={settings}
         bookedDates={bookedDates}
