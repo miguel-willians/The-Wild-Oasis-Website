@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 
 import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
+import { ReservationProvider } from "./_context/ReservationContext";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -10,8 +11,6 @@ const josefin = Josefin_Sans({
 });
 
 export const metadata = {
-  // title: "The Wild Oasis"
-  // %s interpolará o title de outras páginas
   title: {
     template: "%s - The Wild Oasis",
     default: "Welcome - The Wild Oasis",
@@ -32,7 +31,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <Header />
         <div className="flex-1 px-8 py-12 grid">
-          <main className="max-w-7xl mx-auto w-full">{children}</main>
+          <main className="max-w-7xl mx-auto w-full">
+            <ReservationProvider>{children}</ReservationProvider>
+          </main>
         </div>
       </body>
     </html>
