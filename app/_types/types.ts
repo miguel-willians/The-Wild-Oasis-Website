@@ -18,3 +18,9 @@ export type Settings = {
 };
 
 export type BookedDates = Date[];
+
+export type User = {
+  name: string;
+  email: string;
+  image: string;
+};

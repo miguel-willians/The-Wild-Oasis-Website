@@ -1,10 +1,14 @@
-import { Cabin } from "../_types/types";
+"use client";
+
+import Image from "next/image";
+import { Cabin, User } from "../_types/types";
 
 interface ReservationForm {
   cabin: Cabin;
+  user: User;
 }
 
-export default function ReservationForm({ cabin }: ReservationForm) {
+export default function ReservationForm({ cabin, user }: ReservationForm) {
   const { maxCapacity } = cabin;
 
   return (
@@ -12,16 +16,17 @@ export default function ReservationForm({ cabin }: ReservationForm) {
       <div className="bg-primary-800 text-primary-300 px-16 py-2 flex justify-between items-center">
         <p>Logged in as</p>
 
-        {/* <div className='flex gap-4 items-center'>
-          <img
-            // Important to display google profile images
-            referrerPolicy='no-referrer'
-            className='h-8 rounded-full'
+        <div className="flex gap-4 items-center">
+          <Image
+            referrerPolicy="no-referrer"
+            className="rounded-full"
             src={user.image}
             alt={user.name}
+            width={32}
+            height={32}
           />
           <p>{user.name}</p>
-        </div> */}
+        </div>
       </div>
 
       <form className="bg-primary-900 py-10 px-16 text-lg flex gap-5 flex-col">
