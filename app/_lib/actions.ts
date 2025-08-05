@@ -1,7 +1,9 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "./auth";
 import { supabase } from "./supabase";
+import { redirect } from "next/navigation";
 
 export default async function UpdateGuestProfile(formData: FormData) {
   const session = await auth();
@@ -20,18 +22,17 @@ export default async function UpdateGuestProfile(formData: FormData) {
 
   const updateData = { nationality, countryFlag, nationalID };
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("guests")
     .update(updateData)
     .eq("id", session.user.guestId)
     .select()
     .single();
 
-  if (error) {
-    console.error(error);
-    throw new Error("Guest could not be updated");
-  }
-  return data;
+  if (error) throw new Error("Guest could not be updated");
+
+  revalidatePath("/account/profile");
+  redirect("/account/profile");
 }
 
 export async function SignInAction() {
