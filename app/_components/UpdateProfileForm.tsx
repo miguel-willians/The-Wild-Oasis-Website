@@ -3,6 +3,8 @@
 import { ReactNode } from "react";
 import { Guest } from "../_types/types";
 import UpdateGuestProfile from "../_lib/actions";
+import { useFormStatus } from "react-dom";
+import Image from "next/image";
 
 interface UpdateProfileFormProps {
   children: ReactNode;
@@ -44,10 +46,13 @@ export default function UpdateProfileForm({
         <div className="flex items-center justify-between">
           <label htmlFor="nationality">Where are you from?</label>
           {countryFlag && (
-            <img
+            <Image
+              width={40}
+              height={5}
               src={countryFlag}
               alt="Country flag"
               className="h-5 rounded-sm"
+              priority
             />
           )}
         </div>
@@ -65,10 +70,21 @@ export default function UpdateProfileForm({
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <button className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-          Update profile
-        </button>
+        <Button />
       </div>
     </form>
+  );
+}
+
+function Button() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      disabled={pending}
+      className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
+    >
+      {pending ? "Updating..." : "Update profile"}
+    </button>
   );
 }
