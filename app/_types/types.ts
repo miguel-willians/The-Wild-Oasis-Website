@@ -24,3 +24,11 @@ export type User = {
   email: string;
   image: string;
 };
+
+export type SessionUser = User & { guestId?: string };
+
+declare module "next-auth" {
+  interface Session {
+    user: SessionUser;
+  }
+}
