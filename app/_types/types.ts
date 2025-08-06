@@ -25,7 +25,7 @@ export type User = {
   image: string;
 };
 
-export type SessionUser = User & { guestId?: string };
+export type SessionUser = User & { guestId: string };
 
 declare module "next-auth" {
   interface Session {
@@ -41,4 +41,47 @@ export type Guest = {
   nationalID: string | null;
   nationality: string | null;
   countryFlag: string | null;
+};
+
+export type Country = {
+  name: string;
+  flag: string;
+  independent: boolean;
+};
+
+export type NewGuest = {
+  email: string;
+  fullName: string;
+};
+
+export type Booking = {
+  id: number;
+  created_at: string;
+  startDate: string;
+  endDate: string;
+  numNights: number;
+  numGuests: number;
+  totalPrice: number;
+  guestId: number;
+  cabinId: number;
+  cabins: {
+    name: string;
+    image: string;
+  };
+};
+
+export type RawBooking = {
+  id: number;
+  created_at: string;
+  startDate: string;
+  endDate: string;
+  numNights: number;
+  numGuests: number;
+  totalPrice: number;
+  guestId: number;
+  cabinId: number;
+  cabins: {
+    name: string;
+    image: string;
+  }[];
 };

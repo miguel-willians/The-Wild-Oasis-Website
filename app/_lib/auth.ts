@@ -19,7 +19,10 @@ export const {
         if (!user.email) return false;
         const existingGuest = await getGuest(user.email);
         if (!existingGuest) {
-          await createGuest({ email: user.email, fullName: user.name });
+          await createGuest({
+            email: user.email as string,
+            fullName: user.name as string,
+          });
         }
         return true;
       } catch {
