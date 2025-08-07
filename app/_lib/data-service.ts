@@ -70,7 +70,7 @@ export async function getBooking(id: number) {
     console.error(error);
     throw new Error("Booking could not get loaded");
   }
-
+  console.log(data);
   return data;
 }
 
@@ -169,21 +169,6 @@ export async function createBooking(newBooking) {
   return data;
 }
 
-// export async function updateGuest(id: number, updatedFields) {
-//   const { data, error } = await supabase
-//     .from("guests")
-//     .update(updatedFields)
-//     .eq("id", id)
-//     .select()
-//     .single();
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Guest could not be updated");
-//   }
-//   return data;
-// }
-
 // export async function updateBooking(id: number, updatedFields) {
 //   const { data, error } = await supabase
 //     .from("bookings")
@@ -195,16 +180,6 @@ export async function createBooking(newBooking) {
 //   if (error) {
 //     console.error(error);
 //     throw new Error("Booking could not be updated");
-//   }
-//   return data;
-// }
-
-// export async function deleteBooking(id: number) {
-//   const { data, error } = await supabase.from("bookings").delete().eq("id", id);
-
-//   if (error) {
-//     console.error(error);
-//     throw new Error("Booking could not be deleted");
 //   }
 //   return data;
 // }
