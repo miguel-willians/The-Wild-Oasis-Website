@@ -39,7 +39,6 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// 4. Hook seguro para uso do contexto
 export function useReservation() {
   const context = useContext(ReservationContext);
   if (context === undefined) {
