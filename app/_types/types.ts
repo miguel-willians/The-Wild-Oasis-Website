@@ -85,3 +85,11 @@ export type RawBooking = {
     image: string;
   }[];
 };
+
+export type ReservationData = {
+  startDate: Date;
+  endDate: Date;
+  numNights: number;
+  cabinPrice: number;
+  cabinId: string | number;
+};

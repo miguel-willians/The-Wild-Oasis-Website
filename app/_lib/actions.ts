@@ -6,6 +6,7 @@ import { supabase } from "./supabase";
 import { redirect } from "next/navigation";
 import { getBookedDatesByCabinId, getBookings } from "./data-service";
 import isAlreadyBooked from "../_utils/utils";
+import { ReservationData } from "../_types/types";
 
 export default async function UpdateGuestProfile(formData: FormData) {
   const session = await auth();
@@ -37,7 +38,10 @@ export default async function UpdateGuestProfile(formData: FormData) {
   redirect("/account/profile");
 }
 
-export async function createReservation(reservationData, formData: FormData) {
+export async function createReservation(
+  reservationData: ReservationData,
+  formData: FormData
+) {
   const session = await auth();
 
   if (!session) throw new Error("You must be logged in");
@@ -78,6 +82,8 @@ export async function createReservation(reservationData, formData: FormData) {
   }
 
   revalidatePath(`/cabins/${reservationData.cabinId}`);
+
+  redirect("/cabins/thankyou");
 }
 
 export async function deleteReservation(bookingId: number) {

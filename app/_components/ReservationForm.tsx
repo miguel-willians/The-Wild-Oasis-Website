@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Cabin, User } from "../_types/types";
+import { Cabin, ReservationData, User } from "../_types/types";
 import { useReservation } from "../_context/ReservationContext";
 import { differenceInDays } from "date-fns";
 import { createReservation } from "../_lib/actions";
@@ -25,9 +25,9 @@ export default function ReservationForm({ cabin, user }: ReservationForm) {
 
   const cabinPrice = numNights - regularPrice * discount;
 
-  const reservationData = {
-    startDate,
-    endDate,
+  const reservationData: ReservationData = {
+    startDate: startDate as Date,
+    endDate: endDate as Date,
     numNights,
     cabinPrice,
     cabinId: id,
