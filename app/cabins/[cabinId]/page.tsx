@@ -37,7 +37,7 @@ export default async function Page({ params }: PageProps) {
   const { name } = cabin;
 
   return (
-    <div className="max-w-6xl mx-auto md:mt-8 px-4">
+    <div className="max-w-6xl mx-auto md:mt-8 md:px-4">
       <Cabin cabin={cabin} />
       <div>
         <h2 className="text-3xl md:text-5xl font-semibold text-center mb-8 md:mb-10 text-accent-400">
