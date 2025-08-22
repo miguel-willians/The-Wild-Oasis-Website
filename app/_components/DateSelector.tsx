@@ -22,6 +22,7 @@ export default function DateSelector({
   const { range, setRange, resetRange } = useReservation();
 
   const emptyRange: DateRange = { from: undefined, to: undefined };
+
   const displayRange: DateRange = isAlreadyBooked(range, bookedDates)
     ? emptyRange
     : range;
@@ -35,6 +36,10 @@ export default function DateSelector({
       : 0;
 
   const cabinPrice = numNights * (regularPrice - discount);
+
+  console.log("cabinPrice", cabinPrice);
+  console.log("numNights", numNights);
+  console.log("regularPrice", regularPrice);
 
   const handleSelect = (selectedRange: DateRange | undefined) => {
     setRange(selectedRange ?? emptyRange);

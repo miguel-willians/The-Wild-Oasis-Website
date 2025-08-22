@@ -21,9 +21,9 @@ export default function ReservationForm({ cabin, user }: ReservationForm) {
   const endDate = range.to;
 
   const numNights =
-    startDate && endDate ? differenceInDays(startDate, endDate) : 0;
+    startDate && endDate ? differenceInDays(endDate, startDate) : 0;
 
-  const cabinPrice = numNights - regularPrice * discount;
+  const cabinPrice = numNights * (regularPrice - discount);
 
   const reservationData: ReservationData = {
     startDate: startDate as Date,
@@ -38,7 +38,10 @@ export default function ReservationForm({ cabin, user }: ReservationForm) {
     reservationData
   );
 
+  console.log(reservationData);
+
   const handleAction = async (formData: FormData) => {
+    console.log(formData);
     await createReservationWithData(formData);
     resetRange();
   };
