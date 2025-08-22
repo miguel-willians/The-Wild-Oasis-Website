@@ -6,16 +6,13 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-interface PageProps {
-  params: {
-    cabinId: string;
-  };
-}
-
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
-  const { name } = await getCabin(Number(params.cabinId));
+}: {
+  params: Promise<{ cabinId: string }>;
+}): Promise<Metadata> {
+  const { cabinId } = await params;
+  const { name } = await getCabin(Number(cabinId));
   return { title: `Cabin ${name}` };
 }
 
@@ -29,8 +26,14 @@ export async function generateStaticParams() {
   return ids;
 }
 
-export default async function Page({ params }: PageProps) {
-  const cabin = await getCabin(Number(params.cabinId));
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ cabinId: string }>;
+}) {
+  const { cabinId } = await params;
+
+  const cabin = await getCabin(Number(cabinId));
 
   if (!cabin) notFound();
 

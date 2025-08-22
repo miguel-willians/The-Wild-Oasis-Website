@@ -8,14 +8,13 @@ export const metadata = {
   title: "Cabins",
 };
 
-interface CabinsPageProps {
-  searchParams: {
-    capacity?: string;
-  };
-}
-
-export default function Page({ searchParams }: CabinsPageProps) {
-  const filter = searchParams?.capacity ?? "all";
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: Promise<{ capacity?: string }>;
+}) {
+  const resolvedSearch = await searchParams;
+  const filter = resolvedSearch?.capacity ?? "all";
 
   return (
     <div>

@@ -26,9 +26,11 @@ export default function Cabin({ cabin }: CabinProps) {
           <span className="text-accent-100">Cabin {name}</span>
         </h3>
 
-        <p className="text-base md:text-lg text-primary-300 mb-10">
-          <TextExpander>{description}</TextExpander>
-        </p>
+        {description && (
+          <p className="text-base md:text-lg text-primary-300 mb-10">
+            <TextExpander text={description} />
+          </p>
+        )}
 
         <ul className="flex flex-col gap-4 mb-7">
           <li className="flex gap-3 items-center">

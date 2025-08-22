@@ -1,16 +1,14 @@
-"use client";
-
 import { useState } from "react";
 
 interface TextExpanderProps {
-  children: string;
+  text: string;
 }
 
-function TextExpander({ children }: TextExpanderProps) {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+export default function TextExpander({ text }: TextExpanderProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const displayText = isExpanded
-    ? children
-    : children.split(" ").slice(0, 40).join(" ") + "...";
+    ? text
+    : text.split(" ").slice(0, 40).join(" ") + "...";
 
   return (
     <span>
@@ -24,5 +22,3 @@ function TextExpander({ children }: TextExpanderProps) {
     </span>
   );
 }
-
-export default TextExpander;

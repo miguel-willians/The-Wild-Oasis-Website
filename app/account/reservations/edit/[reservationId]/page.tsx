@@ -3,23 +3,26 @@ import { UpdateReservation } from "@/app/_lib/actions";
 import { getBooking, getCabin } from "@/app/_lib/data-service";
 import { Metadata } from "next";
 
-interface PageProps {
-  params: {
-    reservationId: string;
-  };
-}
-
 export async function generateMetadata({
   params,
-}: PageProps): Promise<Metadata> {
-  const { id } = await getBooking(Number(params.reservationId));
+}: {
+  params: Promise<{ reservationId: string }>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const { id } = await getBooking(Number(resolvedParams.reservationId));
 
   return { title: `Reservation #${id} ` };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ reservationId: string }>;
+}) {
+  const { reservationId } = await params;
+
   const { cabinId, observations, numGuests } = await getBooking(
-    Number(params.reservationId)
+    Number(reservationId)
   );
 
   const { maxCapacity } = await getCabin(cabinId);
@@ -27,7 +30,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <div>
       <h2 className="font-semibold text-2xl text-accent-400 mb-7">
-        Edit Reservation #{params.reservationId}
+        Edit Reservation #{reservationId}
       </h2>
 
       <form
@@ -65,7 +68,7 @@ export default async function Page({ params }: PageProps) {
           />
         </div>
 
-        <input type="hidden" name="id" id="id" value={params.reservationId} />
+        <input type="hidden" name="id" id="id" value={reservationId} />
 
         <div className="flex justify-end items-center gap-6">
           <SubmitButton pendingLabel="Updating...">
