@@ -8,6 +8,8 @@ interface CabinsListProps {
 export default async function CabinList({ filter }: CabinsListProps) {
   const cabins = await getCabins();
 
+  console.log(cabins);
+
   if (!cabins) return null;
 
   let displayedCabins;

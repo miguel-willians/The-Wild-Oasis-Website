@@ -5,7 +5,6 @@ import {
   HomeIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
-import SignOutButton from "./SignOutButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -31,25 +30,31 @@ export default function SideNavigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="border-r border-primary-900">
-      <ul className="flex flex-col gap-2 h-full text-lg">
+    <nav
+      role="navigation"
+      aria-label="Account navigation"
+      className="
+        fixed bottom-0 left-0 w-full z-50
+        bg-primary-950 border-t border-primary-800
+        md:static md:w-auto md:z-auto md:bg-transparent md:border-none
+      "
+    >
+      <ul className="flex md:flex-col gap-2 text-lg justify-around md:justify-start px-2 md:px-0 py-1 md:py-0">
         {navLinks.map((link) => (
-          <li key={link.name}>
+          <li key={link.name} className="flex-1 md:flex-none">
             <Link
-              className={`py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200 ${
-                pathname === link.href && "bg-primary-900"
-              }`}
               href={link.href}
+              className={`flex flex-col md:flex-row items-center justify-center md:justify-start gap-1 md:gap-4 py-2 px-3 md:py-3 md:px-5 font-semibold text-primary-200 hover:bg-primary-900 hover:text-primary-100 transition-colors ${
+                pathname === link.href ? "bg-primary-900" : ""
+              }`}
             >
               {link.icon}
-              <span>{link.name}</span>
+              <span className="text-xs md:text-base md:inline">
+                {link.name}
+              </span>
             </Link>
           </li>
         ))}
-
-        <li className="mt-auto">
-          <SignOutButton />
-        </li>
       </ul>
     </nav>
   );

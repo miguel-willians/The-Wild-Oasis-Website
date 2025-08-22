@@ -31,18 +31,18 @@ export default function ReservationCard({
   } = booking;
 
   return (
-    <div className="flex border border-primary-800">
-      <div className="relative h-32 aspect-square">
+    <div className="flex flex-col md:flex-row border border-primary-800">
+      <div className="relative w-full md:w-32 aspect-square">
         <Image
           fill
           src={image}
           alt={`Cabin ${name}`}
-          className="object-cover border-r border-primary-800"
+          className="object-cover border-b md:border-b-0 md:border-r border-primary-800"
         />
       </div>
 
-      <div className="flex-grow px-6 py-3 flex flex-col">
-        <div className="flex items-center justify-between">
+      <div className="flex-grow px-4 py-3 flex flex-col">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
           <h3 className="text-xl font-semibold">
             {numNights} nights in Cabin {name}
           </h3>
@@ -57,7 +57,7 @@ export default function ReservationCard({
           )}
         </div>
 
-        <p className="text-lg text-primary-300">
+        <p className="text-lg text-primary-300 mt-2">
           {format(new Date(startDate), "EEE, MMM dd yyyy")} (
           {isToday(parseISO(startDate))
             ? "Today"
@@ -65,26 +65,30 @@ export default function ReservationCard({
           ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
         </p>
 
-        <div className="flex gap-5 mt-auto items-baseline">
-          <p className="text-xl font-semibold text-accent-400">${totalPrice}</p>
-          <p className="text-primary-300">&bull;</p>
-          <p className="text-lg text-primary-300">
-            {numGuests} guest{numGuests > 1 && "s"}
-          </p>
-          <p className="ml-auto text-sm text-primary-400">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-5 mt-4 md:mt-auto items-start md:items-baseline">
+          <div className="flex flex-row gap-2">
+            <p className="text-xl font-semibold text-accent-400">
+              ${totalPrice}
+            </p>
+            <p className="text-primary-300">&bull;</p>
+            <p className="text-lg text-primary-300">
+              {numGuests} guest{numGuests > 1 && "s"}
+            </p>
+          </div>
+          <p className="text-sm text-primary-400 mt-1 md:mt-0 md:ml-auto">
             Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}
           </p>
         </div>
       </div>
 
       {!isPast(startDate) && (
-        <div className="flex flex-col border-l border-primary-800 w-[100px]">
+        <div className="flex md:flex-col border-t md:border-t-0 md:border-l border-primary-800 w-full md:w-[100px]">
           <Link
             href={`/account/reservations/edit/${id}`}
-            className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 border-b border-primary-800 flex-grow px-3 hover:bg-accent-600 transition-colors hover:text-primary-900"
+            className="group flex items-center gap-2 uppercase text-xs font-bold text-primary-300 border-primary-800 border-r md:border-b md:border-b-primary-800 md:border-none flex-grow px-3 py-2 hover:bg-accent-600 transition-colors hover:text-primary-900"
           >
             <PencilSquareIcon className="h-5 w-5 text-primary-600 group-hover:text-primary-800 transition-colors" />
-            <span className="mt-1">Edit</span>
+            <span className="mt-1 md:mt-0">Edit</span>
           </Link>
           <DeleteReservation bookingId={id} onDelete={onDelete} />
         </div>
