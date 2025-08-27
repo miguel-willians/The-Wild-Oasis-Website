@@ -38,10 +38,7 @@ export default function ReservationForm({ cabin, user }: ReservationForm) {
     reservationData
   );
 
-  console.log(reservationData);
-
   const handleAction = async (formData: FormData) => {
-    console.log(formData);
     await createReservationWithData(formData);
     resetRange();
   };

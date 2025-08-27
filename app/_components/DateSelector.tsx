@@ -37,10 +37,6 @@ export default function DateSelector({
 
   const cabinPrice = numNights * (regularPrice - discount);
 
-  console.log("cabinPrice", cabinPrice);
-  console.log("numNights", numNights);
-  console.log("regularPrice", regularPrice);
-
   const handleSelect = (selectedRange: DateRange | undefined) => {
     setRange(selectedRange ?? emptyRange);
   };

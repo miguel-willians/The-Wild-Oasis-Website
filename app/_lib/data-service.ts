@@ -10,7 +10,7 @@ export async function getCabin(id: number) {
     .single();
 
   if (error) {
-    console.error(error);
+    throw new Error("Cabin could not be loaded");
   }
 
   return data;
@@ -24,7 +24,7 @@ export async function getCabinPrice(id: number) {
     .single();
 
   if (error) {
-    console.error(error);
+    throw new Error("Cabin price could not be loaded");
   }
 
   return data;
@@ -37,7 +37,6 @@ export const getCabins = async function () {
     .order("name");
 
   if (error) {
-    console.error(error);
     throw new Error("Cabins could not be loaded");
   }
 
@@ -52,7 +51,6 @@ export async function getGuest(email: string) {
     .single();
 
   if (error) {
-    console.error(error);
     throw new Error("Guest could not be loaded");
   }
 
@@ -67,10 +65,8 @@ export async function getBooking(id: number) {
     .single();
 
   if (error) {
-    console.error(error);
     throw new Error("Booking could not get loaded");
   }
-  console.log(data);
   return data;
 }
 
@@ -84,7 +80,6 @@ export async function getBookings(guestId: string): Promise<Booking[]> {
     .order("startDate");
 
   if (error) {
-    console.error(error);
     throw new Error("Bookings could not get loaded");
   }
 
@@ -104,7 +99,6 @@ export async function getBookedDatesByCabinId(cabinId: number) {
     .or(`startDate.gte.${todayISO},status.eq.checked-in`);
 
   if (error) {
-    console.error(error);
     throw new Error("Bookings could not get loaded");
   }
 
@@ -124,7 +118,6 @@ export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
 
   if (error) {
-    console.error(error);
     throw new Error("Settings could not be loaded");
   }
 
@@ -147,7 +140,6 @@ export async function createGuest(newGuest: NewGuest) {
   const { data, error } = await supabase.from("guests").insert([newGuest]);
 
   if (error) {
-    console.error(error);
     throw new Error("Guest could not be created");
   }
 

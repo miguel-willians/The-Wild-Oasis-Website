@@ -14,7 +14,6 @@ export const {
       return !!auth?.user;
     },
     async signIn({ user }) {
-      console.log(user);
       try {
         if (!user.email) return false;
         const existingGuest = await getGuest(user.email);

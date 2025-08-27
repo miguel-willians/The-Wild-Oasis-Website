@@ -77,7 +77,6 @@ export async function createReservation(
     .single();
 
   if (error) {
-    console.error(error);
     throw new Error("Booking could not be created");
   }
 
@@ -111,8 +110,6 @@ export async function deleteReservation(bookingId: number) {
 }
 
 export async function UpdateReservation(formData: FormData) {
-  console.log(formData);
-
   const session = await auth();
 
   if (!session) throw new Error("You must be logged in");
@@ -145,7 +142,6 @@ export async function UpdateReservation(formData: FormData) {
     .single();
 
   if (error) {
-    console.log(error);
     throw new Error("Reservation could not be updated");
   }
 
