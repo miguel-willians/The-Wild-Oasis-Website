@@ -50,6 +50,10 @@ export async function getGuest(email: string) {
     .eq("email", email)
     .single();
 
+  if (error && error.code === "PGRST116") {
+    return null;
+  }
+
   if (error) {
     throw new Error("Guest could not be loaded");
   }
